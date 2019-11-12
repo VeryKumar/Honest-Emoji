@@ -19,7 +19,7 @@ function Chat(props) {
 
   const handleMessageChange = event => {
     setPendingMessage(event.target.value);
-    setFile(event.target.files[0]);
+   
   };
 
   const handleSendMessage = () => {
@@ -29,7 +29,7 @@ function Chat(props) {
     if (file) {
       props.chatkit.sendMultipartMessage({ parts: [{ file: file }] });
     }
-    console.log(file);
+    console.log(props.chatkit);
 
     setPendingMessage('');
   };

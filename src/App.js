@@ -29,7 +29,7 @@ function App() {
               tokenProvider={tokenProvider}
               userId={userId}
             >
-              <UserList userId={userId} />
+              <UserList userId={userId} otherUserId={otherUserId}  />
               <Chat otherUserId={otherUserId} />
             </ChatkitProvider>
           </div>
