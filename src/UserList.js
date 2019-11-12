@@ -2,7 +2,8 @@ import React from 'react';
 import './UserList.css';
 import defaultAvatar from './default-avatar.png';
 
-function UserList({ userId }) {
+function UserList(props, { userId }) {
+  console.log(props);
   return (
     <div className="UserList">
       <div className="UserList__titlebar">
@@ -75,6 +76,7 @@ function UserList({ userId }) {
           </li>
         </ul>
       </div>
+      PUT VID HERE
     </div>
   );
 }

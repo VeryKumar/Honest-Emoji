@@ -53,11 +53,21 @@
   margin-bottom: 1rem;
 }
 
+.image__image {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+  width: 300px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+  display: block;
+  position: relative;
+}
+
 .Chat__messages__message {
   border-radius: 0.5rem;
   padding: 1rem;
   padding-bottom: 0.5rem;
-  min-width: 300px;
+  width: 300px;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
   display: block;
   position: relative;

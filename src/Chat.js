@@ -6,9 +6,11 @@ import './Chat.css';
 import defaultAvatar from './default-avatar.png';
 
 function Chat(props) {
-  //first is the value, second is the function
+  console.log(props);
+  //first is the value, second is the function. example of a react hook.
   const [pendingMessage, setPendingMessage] = useState('');
   const [file, setFile] = useState('');
+  //this is a ref. it provides access to a DOM node created in render
   const messageList = React.createRef();
 
   const handleMessageKeyDown = event => {
@@ -17,16 +19,20 @@ function Chat(props) {
     }
   };
 
+  const handleFileChange = event => {
+    setFile(event.target.files[0]);
+  };
+
   const handleMessageChange = event => {
     setPendingMessage(event.target.value);
-    setFile(event.target.files[0]);
+    console.log(messageList);
   };
 
   const handleSendMessage = () => {
     if (pendingMessage !== '') {
       props.chatkit.sendSimpleMessage({ text: pendingMessage });
-    }
-    if (file) {
+      // console.log(props.chatkit.children);
+    } else if (file) {
       props.chatkit.sendMultipartMessage({ parts: [{ file: file }] });
     }
     console.log(file);
@@ -38,15 +44,23 @@ function Chat(props) {
     messageList.current.scrollTop = messageList.current.scrollHeight;
   });
 
-  const messages = props.chatkit.messages.map(m => ({
-    id: m.id,
-    isOwnMessage: m.sender.id === props.chatkit.currentUser.id,
-    createdAt: m.createdAt,
-    // This will only work with simple messages.
-    // To learn more about displaying multi-part messages see
-    // https://pusher.com/docs/chatkit/reference/javascript#messages
-    textContent: m.parts[0].payload.content,
-  }));
+  const messages = props.chatkit.messages.map(
+    m => (
+      console.log(m),
+      {
+        id: m.id,
+        isOwnMessage: m.sender.id === props.chatkit.currentUser.id,
+        createdAt: m.createdAt,
+        // This will only work with simple messages.
+        // To learn more about displaying multi-part messages see
+        // https://pusher.com/docs/chatkit/reference/javascript#messages
+        textContent: m.parts[0].payload.content,
+        imageContent: m.parts[0].payload._downloadURL,
+        // types can be "text/plain" or "image/jpeg"
+        type: m.parts[0].payload.type,
+      }
+    ),
+  );
 
   return (
     <div className="Chat">
@@ -70,7 +84,7 @@ function Chat(props) {
         ))}
       </div>
       <div className="Chat__compose">
-        <input type="file" onChange={handleMessageChange}></input>
+        <input type="file" onChange={handleFileChange}></input>
         <input
           className="Chat__compose__input"
           type="text"
@@ -87,7 +101,14 @@ function Chat(props) {
   );
 }
 
-function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
+function Message({
+  isOwnMessage,
+  isLatestMessage,
+  createdAt,
+  textContent,
+  imageContent,
+  type,
+}) {
   return (
     <div
       className={
@@ -104,7 +125,14 @@ function Message({ isOwnMessage, isLatestMessage, createdAt, textContent }) {
               : 'Chat__messages__message Chat__messages__message--other'
           }
         >
-          <div className="Chat__messages__message__content">{textContent}</div>
+          {type === 'text/plain' ? (
+            <div className="Chat__messages__message__content">
+              {textContent}
+            </div>
+          ) : (
+            <img class="image__image" src={imageContent} alt="ohno!" />
+          )}
+
           <div className="Chat__messages__message__time">
             <Moment
               calendar={{
