@@ -1,6 +1,7 @@
-import React from 'react';
-import './UserList.css';
-import defaultAvatar from './default-avatar.png';
+import React from "react";
+import "./UserList.css";
+import defaultAvatar from "./default-avatar.png";
+import ReactPlayer from "react-player";
 
 function UserList(props, { userId }) {
   console.log(props);
@@ -77,6 +78,8 @@ function UserList(props, { userId }) {
         </ul>
       </div>
       PUT VID HERE
+      {/* <iframe src="http://127.0.0.1:5501/index.html"></iframe> */}
+      <ReactPlayer url="http://127.0.0.1:5501/index.html" playing />
     </div>
   );
 }

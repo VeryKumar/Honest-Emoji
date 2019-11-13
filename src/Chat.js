@@ -1,20 +1,20 @@
-import Moment from 'react-moment';
-import React, { useState, useEffect } from 'react';
-import { withChatkitOneToOne } from '@pusher/chatkit-client-react';
+import Moment from "react-moment";
+import React, { useState, useEffect } from "react";
+import { withChatkitOneToOne } from "@pusher/chatkit-client-react";
 
-import './Chat.css';
-import defaultAvatar from './default-avatar.png';
+import "./Chat.css";
+import defaultAvatar from "./default-avatar.png";
 
 function Chat(props) {
-  console.log(props);
+  // console.log(props);
   //first is the value, second is the function. example of a react hook.
-  const [pendingMessage, setPendingMessage] = useState('');
-  const [file, setFile] = useState('');
+  const [pendingMessage, setPendingMessage] = useState("");
+  const [file, setFile] = useState("");
   //this is a ref. it provides access to a DOM node created in render
   const messageList = React.createRef();
 
   const handleMessageKeyDown = event => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSendMessage();
     }
   };
@@ -25,45 +25,39 @@ function Chat(props) {
 
   const handleMessageChange = event => {
     setPendingMessage(event.target.value);
-<<<<<<< HEAD
-    console.log(messageList);
-=======
-   
->>>>>>> 846311a1d7abd38d48d26136d2a31b15d9c9bd98
+    // console.log(messageList);
   };
 
   const handleSendMessage = () => {
-    if (pendingMessage !== '') {
+    if (pendingMessage !== "") {
       props.chatkit.sendSimpleMessage({ text: pendingMessage });
       // console.log(props.chatkit.children);
     } else if (file) {
       props.chatkit.sendMultipartMessage({ parts: [{ file: file }] });
     }
-    console.log(props.chatkit);
+    // console.log(props.chatkit);
 
-    setPendingMessage('');
+    setPendingMessage("");
   };
 
   useEffect(() => {
     messageList.current.scrollTop = messageList.current.scrollHeight;
   });
 
-  const messages = props.chatkit.messages.map(
-    m => (
-      console.log(m),
-      {
-        id: m.id,
-        isOwnMessage: m.sender.id === props.chatkit.currentUser.id,
-        createdAt: m.createdAt,
-        // This will only work with simple messages.
-        // To learn more about displaying multi-part messages see
-        // https://pusher.com/docs/chatkit/reference/javascript#messages
-        textContent: m.parts[0].payload.content,
-        imageContent: m.parts[0].payload._downloadURL,
-        // types can be "text/plain" or "image/jpeg"
-        type: m.parts[0].payload.type,
-      }
-    ),
+  const messages = props.chatkit.messages.map(m =>
+    // console.log(m),
+    ({
+      id: m.id,
+      isOwnMessage: m.sender.id === props.chatkit.currentUser.id,
+      createdAt: m.createdAt,
+      // This will only work with simple messages.
+      // To learn more about displaying multi-part messages see
+      // https://pusher.com/docs/chatkit/reference/javascript#messages
+      textContent: m.parts[0].payload.content,
+      imageContent: m.parts[0].payload._downloadURL,
+      // types can be "text/plain" or "image/jpeg"
+      type: m.parts[0].payload.type
+    })
   );
 
   return (
@@ -77,7 +71,7 @@ function Chat(props) {
         <div className="Chat__titlebar__details">
           <span>
             {props.chatkit.isLoading
-              ? 'Loading...'
+              ? "Loading..."
               : props.chatkit.otherUser.name}
           </span>
         </div>
@@ -111,25 +105,25 @@ function Message({
   createdAt,
   textContent,
   imageContent,
-  type,
+  type
 }) {
   return (
     <div
       className={
         isOwnMessage
-          ? 'Chat__messages__message__wrapper Chat__messages__message__wrapper--self'
-          : 'Chat__messages__message__wrapper Chat__messages__message__wrapper--other'
+          ? "Chat__messages__message__wrapper Chat__messages__message__wrapper--self"
+          : "Chat__messages__message__wrapper Chat__messages__message__wrapper--other"
       }
     >
       <div className="Chat__messages__message__wrapper__inner">
         <div
           className={
             isOwnMessage
-              ? 'Chat__messages__message Chat__messages__message--self'
-              : 'Chat__messages__message Chat__messages__message--other'
+              ? "Chat__messages__message Chat__messages__message--self"
+              : "Chat__messages__message Chat__messages__message--other"
           }
         >
-          {type === 'text/plain' ? (
+          {type === "text/plain" ? (
             <div className="Chat__messages__message__content">
               {textContent}
             </div>
@@ -140,9 +134,9 @@ function Message({
           <div className="Chat__messages__message__time">
             <Moment
               calendar={{
-                sameDay: 'LT',
-                lastDay: '[Yesterday at] LT',
-                lastWeek: '[last] dddd [at] LT',
+                sameDay: "LT",
+                lastDay: "[Yesterday at] LT",
+                lastWeek: "[last] dddd [at] LT"
               }}
             >
               {createdAt}
@@ -151,8 +145,8 @@ function Message({
           <div
             className={
               isOwnMessage
-                ? 'Chat__messages__message__arrow alt'
-                : 'Chat__messages__message__arrow'
+                ? "Chat__messages__message__arrow alt"
+                : "Chat__messages__message__arrow"
             }
           />
         </div>
