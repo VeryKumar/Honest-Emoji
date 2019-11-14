@@ -1,22 +1,25 @@
-const video = document.getElementById('video');
+const video = document.getElementById("video");
+console.log("loaded");
 
 Promise.all([
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-  faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-  faceapi.nets.faceExpressionNet.loadFromUri('/models'),
-]).then(startVideo);
+  faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+  faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
+  faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+  faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
+  faceapi.nets.faceExpressionNet.loadFromUri("/models")
+])
+  .then(console.log("loaded promises"))
+  .then(startVideo);
 
 function startVideo() {
   navigator.getUserMedia(
     { video: {} },
     stream => (video.srcObject = stream),
-    err => console.err(err),
+    err => console.err(err)
   );
 }
 
-video.addEventListener('play', () => {
+video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
   document.body.append(canvas);
   const displaySize = { width: video.width, height: video.height };
@@ -29,7 +32,7 @@ video.addEventListener('play', () => {
       .withFaceExpressions();
     const resizedDetections = faceapi.resizeResults(detections, displaySize);
 
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
   }, 100);
@@ -46,17 +49,17 @@ video.addEventListener('play', () => {
     let neutral = detections[0].expressions.neutral;
 
     if (happy > surprised && happy > sad && happy > neutral) {
-      console.log('Your Honest Emoji is :');
-      console.log('%c😄', 'font-size: 55px; font-family: futura');
+      console.log("Your Honest Emoji is :");
+      console.log("%c😄", "font-size: 55px; font-family: futura");
     } else if (surprised > happy && surprised > sad && surprised > neutral) {
-      console.log('Your Honest Emoji is :');
-      console.log('%c😯', 'font-size: 55px; font-family: futura');
+      console.log("Your Honest Emoji is :");
+      console.log("%c😯", "font-size: 55px; font-family: futura");
     } else if (sad > surprised && sad > happy && sad > neutral) {
-      console.log('Your Honest Emoji is :');
-      console.log('%c😭', 'font-size: 55px; font-family: futura');
+      console.log("Your Honest Emoji is :");
+      console.log("%c😭", "font-size: 55px; font-family: futura");
     } else {
-      console.log('Your Honest Emoji is :');
-      console.log('%c😐', 'font-size: 55px; font-family: futura');
+      console.log("Your Honest Emoji is :");
+      console.log("%c😐", "font-size: 55px; font-family: futura");
     }
   }, 1000);
 });

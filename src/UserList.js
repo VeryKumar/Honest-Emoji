@@ -2,11 +2,14 @@ import React from "react";
 import "./UserList.css";
 import defaultAvatar from "./default-avatar.png";
 import ReactPlayer from "react-player";
+import Webcam from "react-webcam";
 
 function UserList(props, { userId }) {
   console.log(props);
   return (
     <div className="UserList">
+      <script defer src="honest-emoji/face-api.min.js"></script>
+      <script defer src="honest-emoji/script.js"></script>
       <div className="UserList__titlebar">
         <img
           src={defaultAvatar}
@@ -79,7 +82,29 @@ function UserList(props, { userId }) {
       </div>
       PUT VID HERE
       {/* <iframe src="http://127.0.0.1:5501/index.html"></iframe> */}
-      <ReactPlayer url="http://127.0.0.1:5501/index.html" playing />
+      {/* <ReactPlayer
+        url="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
+        playing
+        config={
+          // {
+          //   file: {
+          //     attributes: {
+          //       crossOrigin: "true"
+          //     }
+          //   }
+          // }
+          {
+            file: {
+              forceHls: "true"
+              // attributes: {
+              //   crossOrigin: "false"
+              // }
+            }
+          }
+        }
+      /> */}
+      {/* <Video /> */}
+      <Webcam />;
     </div>
   );
 }
