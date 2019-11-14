@@ -20,7 +20,7 @@ function UserList(props, { userId }) {
       </div>
       <div className="UserList__container">
         <ul className="UserList__container__list">
-          <li className="UserList__container__list__item">
+          <li className="UserList__container__list__item" onClick=>
             <div>
               <img
                 src={defaultAvatar}
