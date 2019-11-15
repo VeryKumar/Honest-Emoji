@@ -11,6 +11,35 @@ Promise.all([
   .then(console.log("loaded promises"))
   .then(startVideo);
 
+const tokenProvider = new Chatkit.TokenProvider({
+  url:
+    "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/aa2b3fbb-81a5-438c-95ae-7de73ab855e9/token"
+});
+
+const chatManager = new Chatkit.ChatManager({
+  instanceLocator: "v1:us1:aa2b3fbb-81a5-438c-95ae-7de73ab855e9",
+  userId: "varun",
+  tokenProvider: tokenProvider
+});
+
+let currentUserObj = {};
+chatManager
+  .connect()
+  .then(currentUser => {
+    currentUserObj = currentUser;
+    currentUser.subscribeToRoomMultipart({
+      roomId: currentUser.rooms[0].id,
+      hooks: {
+        onMessage: message => {
+          console.log("Received message:", message);
+        }
+      }
+    });
+  })
+  .catch(error => {
+    console.error("error:", error);
+  });
+
 function startVideo() {
   navigator.getUserMedia(
     { video: {} },
@@ -37,6 +66,7 @@ video.addEventListener("play", () => {
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
   }, 100);
 
+  const emoji = "";
   setInterval(async () => {
     const detections = await faceapi
       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
@@ -51,15 +81,31 @@ video.addEventListener("play", () => {
     if (happy > surprised && happy > sad && happy > neutral) {
       console.log("Your Honest Emoji is :");
       console.log("%c😄", "font-size: 55px; font-family: futura");
+      currentUserObj.sendSimpleMessage({
+        text: "😄",
+        roomId: currentUserObj.rooms[0].id
+      });
     } else if (surprised > happy && surprised > sad && surprised > neutral) {
       console.log("Your Honest Emoji is :");
       console.log("%c😯", "font-size: 55px; font-family: futura");
+      currentUserObj.sendSimpleMessage({
+        text: "😯",
+        roomId: currentUserObj.rooms[0].id
+      });
     } else if (sad > surprised && sad > happy && sad > neutral) {
       console.log("Your Honest Emoji is :");
       console.log("%c😭", "font-size: 55px; font-family: futura");
+      currentUserObj.sendSimpleMessage({
+        text: "😭",
+        roomId: currentUserObj.rooms[0].id
+      });
     } else {
       console.log("Your Honest Emoji is :");
       console.log("%c😐", "font-size: 55px; font-family: futura");
+      currentUserObj.sendSimpleMessage({
+        text: "😐",
+        roomId: currentUserObj.rooms[0].id
+      });
     }
   }, 1000);
 });
