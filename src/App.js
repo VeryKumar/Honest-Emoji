@@ -63,7 +63,7 @@ function App(props) {
       <div className="App__backdrop">
         <img
           className="App__backdrop__logo"
-          src={chatkitLogo}
+          src={"https://i.ibb.co/jv4Yhyw/Asset-3-4x.png"}
           alt="Chatkit logo"
         />
       </div>

@@ -41,7 +41,7 @@ class UserList extends React.Component {
         <script defer src="honest-emoji/script.js"></script>
         <div className="UserList__titlebar">
           <img
-            src={defaultAvatar}
+            src={'https://i.pinimg.com/originals/49/a7/72/49a7722d61e9e38a7d2f45836a5139e9.jpg'}
             className="UserList__titlebar__avatar"
             alt="avatar"
           />
@@ -64,7 +64,7 @@ class UserList extends React.Component {
                         <img
                           data-id={idx}
                           data-name={room.name.split("& ").pop()}
-                          src={defaultAvatar}
+                          src={'https://i.pinimg.com/originals/49/a7/72/49a7722d61e9e38a7d2f45836a5139e9.jpg'}
                           className={`UserList__container__list__item__avatar`}
                           alt="avatar"
                         />
@@ -87,7 +87,7 @@ class UserList extends React.Component {
                           data-name={room.name.split("& ").pop()}
                           className={`UserList__container__list__item__content__text`}
                         >
-                          Joe: Not bad, how was yours?
+                          {/* Joe: Not bad, how was yours? */}
                         </p>
                       </div>
                       <div
@@ -103,7 +103,6 @@ class UserList extends React.Component {
               : null}
           </ul>
         </div>
-        PUT VID HERE
         {/* <iframe src="http://127.0.0.1:5501/index.html"></iframe> */}
         {/* <ReactPlayer
         url="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4"
@@ -127,7 +126,7 @@ class UserList extends React.Component {
         }
       /> */}
         {/* <Video /> */}
-        <Webcam />;
+        <Webcam className='video'/>
       </div>
     );
   }

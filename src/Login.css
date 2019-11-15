@@ -21,7 +21,7 @@
 }
 
 .Login__button {
-  background: #542182;
+  background: #FF9B83;
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   color: white;
@@ -33,5 +33,5 @@
 
 .Login__button:hover {
   cursor: pointer;
-  background: #742fb3;
+  background: #FEDA84;
 }

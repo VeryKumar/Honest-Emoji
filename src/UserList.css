@@ -10,7 +10,7 @@
 .UserList__titlebar {
   display: flex;
   align-items: center;
-  background: #ededed;
+  background:  lightyellow;
   padding: 0rem 0.5rem;
   height: 4rem;
 }
@@ -38,11 +38,13 @@
 .UserList__container__list__item {
   display: flex;
   border-bottom: 1px solid #e0e0e0;
-  padding: 1rem;
+  border-top: 1px solid #e0e0e0;;
+  padding: 5px;
+  background-color:  lightyellow;
 }
 
 .UserList__container__list__item--selected {
-  background: #f2f2f2;
+  background: #FF9B83;
 }
 
 .UserList__container__list__item__avatar {
@@ -55,6 +57,7 @@
   padding: 0.5rem;
   flex-shrink: 1;
   overflow: hidden;
+  color: black;
 }
 
 .UserList__container__list__item__content__name {
@@ -63,7 +66,7 @@
 }
 
 .UserList__container__list__item__content__text {
-  color: #606060;
+  color:black;
   margin: 0;
   margin-top: 0.5rem;
   white-space: nowrap;
@@ -72,10 +75,21 @@
 }
 
 .UserList__container__list__item__time {
-  color: #a0a0a0;
+  color: white;
   padding: 0.5rem;
   flex-grow: 1;
   text-align: right;
+}
+
+.video {
+  padding-top: 65px;
+  padding-bottom: 40px;
+  
+
+  /* margin-bottom: 30px; */
+  height: 380px;
+  background-color: lightyellow;
+ 
 }
 
 @media only screen and (max-width: 900px) {
